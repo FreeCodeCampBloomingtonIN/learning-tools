@@ -1,0 +1,53 @@
+*{
+    box-sizing: border-box;
+    /*border: 1px dashed grey;*/
+}
+img{
+    width: 100%;
+}
+table{
+    width: 100%;
+    font-size: 50px;
+    padding: 50px 20px 50px 20px;
+    text-align: center;
+    border-radius: 30px;
+    background-color: #CD0001;
+}
+.container{
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 960px;
+    text-align: center;
+}
+
+.mn-sec-exec1-game{
+    display: flex;
+    padding-top: 20px;
+}
+.mn-sec-exec1-ggrid{
+    flex: 2;
+    background-color: #9A33CC;
+    padding: 50px;
+    border: 1px solid grey;
+}
+.mn-sec-exec1-gpic{
+    flex: 1;
+    background: url("http://kpcbweb2.s3.amazonaws.com/content/499/original_Apples.jpg") no-repeat center center;
+    background-size: cover;
+}
+td{
+    opacity: 1;
+    transition: all 1.3s ease;
+    background-color: #FF3300;
+    padding: 7px;
+}
+td:hover{
+    opacity: .3;
+    background-color: black;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
