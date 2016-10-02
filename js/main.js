@@ -25,4 +25,13 @@ for(var i=0; i<sentenceArr.length; i++){
     synth.speak(findWord);
     var word = new SpeechSynthesisUtterance(sentenceArr[i]);
     synth.speak(word);
+    var success = false;
+    // while(success===false){
+    //     # onclick get id of div
+    //     # compare div id to word (sentenceArr[i])
+    //     # If match success = true
+    //         # make div green and add word to screen
+    //         # reset div colors except correct div
+    //     # else make div red repeat sentence and find word script
+    // }
 }
