@@ -1,14 +1,86 @@
-$( document ).ready(function() {
-  
-
-
 var synth = window.speechSynthesis;
-var utterThis = new SpeechSynthesisUtterance('Click on the word. I.');
-var sentence1 = new SpeechSynthesisUtterance('The sentence is. I eat Apples');
+var sentences = [
+    ["I", "EAT", "APPLES"],
+    ["SEE", "SPOT", "RUN"],
+    ["MARY", "PLAYS", "BALL"]
+];
+var currentSentenceNumber = 0;
+var currentWordNumber = 0;
+var wordsInPosition = ["", "", "", "", "", "", "", "", ""];
 
+var shuffleArray = function(array) {
+    for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
 
-$("#play").click(function(){
-      synth.speak(sentence1);      
-      synth.speak(utterThis);
-    });
+var shuffleWords = function() {
+    var newOrder = shuffleArray([0, 1, 2, 3, 4, 5, 6, 7, 8]);
+    var wordIndex = 0;
+    for (var i in sentences) {
+        for (var j in sentences[i]) {
+            $("#grid-" + newOrder[wordIndex]).html(sentences[i][j].toUpperCase());
+            wordsInPosition[newOrder[wordIndex]] = sentences[i][j].toUpperCase();
+            wordIndex++;
+        }
+    }
+}
+
+var play = function(textToPlay) {
+    var playThis = new SpeechSynthesisUtterance(textToPlay);
+    synth.speak(playThis);
+    console.log("SPOKE: " + textToPlay);
+}
+
+var playCurrentSentence = function() {
+    play(sentences[currentSentenceNumber].join(" "));
+}
+
+var playCurrentWord = function() {
+    play(sentences[currentSentenceNumber][currentWordNumber]);
+}
+
+var checkWord = function(gridPosition) {
+    if (wordsInPosition[gridPosition] == sentences[currentSentenceNumber][currentWordNumber]) {
+        sentenceTextArray = sentences[currentSentenceNumber].slice(0, currentWordNumber + 1);
+        $("#sentence-text").html(sentenceTextArray.join(" "));
+        play("You clicked the right word!");
+        currentWordNumber++;
+        runWord();
+    } else {
+        play(wordsInPosition[gridPosition] + "... is not the right word.");
+        play("Click on the word... " + sentences[currentSentenceNumber][currentWordNumber]);
+    }
+}
+
+var runWord = function() {
+    if (currentWordNumber < sentences[currentSentenceNumber].length) {
+        play("Click on the word... " + sentences[currentSentenceNumber][currentWordNumber]);
+    } else {
+        play("You clicked all the right words!");
+    }
+}
+
+var runSentence = function(sentenceNumber) {
+	document.getElementById("game-board").style.visibility = "";
+	document.getElementById("get-started").style.visibility = "hidden";
+    currentSentenceNumber = sentenceNumber;
+    currentWordNumber = 0;
+    for (var i in sentences) {
+        document.getElementById("button-sentence-" + i).className = "list-group-item";
+    }
+    document.getElementById("button-sentence-" + currentSentenceNumber).className = "list-group-item active";
+    shuffleWords();
+    play("I'm going to read a sentence to you. Then I will read each word. Click on the word as I say it. Are you ready to start?");
+    play("The sentence is... " + sentences[currentSentenceNumber].join(" "));
+    runWord();
+}
+
+$(document).ready(function() {
+	play("Welcome to teach your child to read.");
+	play("Click on a sentence to get started.");
 });
