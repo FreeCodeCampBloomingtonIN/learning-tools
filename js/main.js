@@ -1,7 +1,7 @@
 var synth = window.speechSynthesis;
 var sentences = [
-    ["I", "EAT", "APPLES"],
     ["SEE", "SPOT", "RUN"],
+    ["I", "EAT", "APPLES"],
     ["MARY", "PLAYS", "BALL"]
 ];
 var currentSentenceNumber = 0;
@@ -23,8 +23,8 @@ var shuffleWords = function() {
     var wordIndex = 0;
     for (var i in sentences) {
         for (var j in sentences[i]) {
-            $("#grid-" + newOrder[wordIndex]).html(sentences[i][j].toUpperCase());
-            wordsInPosition[newOrder[wordIndex]] = sentences[i][j].toUpperCase();
+            $("#grid-" + newOrder[wordIndex]).html(sentences[i][j]);
+            wordsInPosition[newOrder[wordIndex]] = sentences[i][j];
             wordIndex++;
         }
     }
@@ -32,12 +32,13 @@ var shuffleWords = function() {
 
 var play = function(textToPlay) {
     var playThis = new SpeechSynthesisUtterance(textToPlay);
+    playThis.rate = 1.5;
     synth.speak(playThis);
     console.log("SPOKE: " + textToPlay);
 }
 
 var playCurrentSentence = function() {
-    play(sentences[currentSentenceNumber].join(" "));
+    play("The sentence is... " + sentences[currentSentenceNumber].join(" "));
 }
 
 var playCurrentWord = function() {
@@ -49,40 +50,55 @@ var checkWord = function(gridPosition) {
     if (wordsInPosition[gridPosition] == sentences[currentSentenceNumber][currentWordNumber]) {
         sentenceTextArray = sentences[currentSentenceNumber].slice(0, currentWordNumber + 1);
         $("#sentence-text").html(sentenceTextArray.join(" "));
-        play("You clicked the right word!");
+        play("You found the right word!");
         currentWordNumber++;
         runWord();
     } else {
-        play(wordsInPosition[gridPosition] + "... is not the right word.");
-        play("Click on the word... " + sentences[currentSentenceNumber][currentWordNumber]);
+        play(wordsInPosition[gridPosition] + "... is not the right word. Let's try again.");
+        play("Find the word... " + sentences[currentSentenceNumber][currentWordNumber]);
     }
 }
 
 var runWord = function() {
     if (currentWordNumber < sentences[currentSentenceNumber].length) {
-        play("Click on the word... " + sentences[currentSentenceNumber][currentWordNumber]);
+        play("Find the word... " + sentences[currentSentenceNumber][currentWordNumber]);
     } else {
-        play("You clicked all the right words!");
+        $("#good-job").fadeIn("slow");
+        play("You found all the right words!");
     }
 }
 
 var runSentence = function(sentenceNumber) {
-	document.getElementById("game-board").style.visibility = "";
-	document.getElementById("get-started").style.visibility = "hidden";
-    $("#sentence-text").html("");
+    $("#game-board").show()
+    $("#get-started").hide();
+    $("#good-job").hide();
+    $("#image-banner").hide("slow");
+    $("#sentence-text").html("&nbsp;");
     currentSentenceNumber = sentenceNumber;
     currentWordNumber = 0;
     for (var i in sentences) {
-        document.getElementById("button-sentence-" + i).className = "list-group-item";
+        $("#button-sentence-" + i).removeClass("active");
     }
-    document.getElementById("button-sentence-" + currentSentenceNumber).className = "list-group-item active";
+    $("#button-sentence-" + currentSentenceNumber).addClass("active");
     shuffleWords();
-    play("I'm going to read a sentence to you. Then I will read each word. Click on the word as I say it. Are you ready to start?");
-    play("The sentence is... " + sentences[currentSentenceNumber].join(" "));
+    play("I'm going to read a sentence to you. Then I will read each word. Click on the word after I say it. Let's get going!");
     runWord();
 }
 
+$(".grid-word").click(function() {
+    checkWord(this.id.split("-")[1]);
+});
+
+$(".button-sentence").click(function() {
+    runSentence(this.id.split("-")[2]);
+});
+
+$("#button-play-word").on("click", playCurrentWord);
+$("#button-play-sentence").on("click", playCurrentSentence);
+
 $(document).ready(function() {
-	play("Welcome to teach your child to read.");
-	play("Click on a sentence to get started.");
+    $("#game-board").hide();
+    $("#good-job").hide();
+    play("Welcome to the reading game.");
+    play("Choose a sentence to get started.");
 });

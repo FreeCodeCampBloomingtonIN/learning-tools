@@ -7,13 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Teach Your Child to Read</title>
+    <title>Reading Game</title>
     <!-- jQuery -->
     <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="css/paper-bootstrap.min.css">
+    <!-- Font Awesome -->
+    <script src="https://use.fontawesome.com/452331a031.js"></script>
+    <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> -->
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <!-- Custom CSS -->
@@ -21,86 +24,81 @@
 </head>
 
 <body>
-    <!-- Navigation -->
     <div class="container">
+        <!-- Header -->
         <div class="row">
-            <nav class="navbar navbar-inverse">
-                <div class="col-md-12">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a href="#">Teach Your Child to Read</a>
-                        </li>
-<!--                         <li>
-                            <a href="#">About</a>
-                        </li>
-                        <li>
-                            <a href="#">Services</a>
-                        </li>
-                        <li>
-                            <a href="#">Contact</a>
-                        </li> -->
-                    </ul>
-                </div>
-            </nav>
+            <div class="col-md-12">
+                <nav class="navbar navbar-inverse">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <span class="navbar-brand" href="#" style="font-color:white;">Reading Game</span>
+                        </div>
+                    </div>
+                </nav>
+            </div>
         </div>
         <div class="row">
+            <!-- Sentence Menu -->
             <div class="col-md-3">
                 <div class="list-group" id="sentence-menu">
-                    <a href="#" class="list-group-item" id="button-sentence-0" onclick="runSentence(0);">Sentence 1</a>
-                    <a href="#" class="list-group-item" id="button-sentence-1" onclick="runSentence(1);">Sentence 2</a>
-                    <a href="#" class="list-group-item" id="button-sentence-2" onclick="runSentence(2);">Sentence 3</a>
-                    <!-- <a href="#" class="list-group-item active">Sentence 4</a>
-                    <a href="#" class="list-group-item active">Sentence 5</a> -->
+                    <a href="#" class="list-group-item button-sentence" id="button-sentence-0">Sentence 1</a>
+                    <a href="#" class="list-group-item button-sentence" id="button-sentence-1">Sentence 2</a>
+                    <a href="#" class="list-group-item button-sentence" id="button-sentence-2">Sentence 3</a>
                 </div>
-                <div id="get-started" class="text-center"><p>Click on a sentence to get started!</p></div>
+                <div id="get-started" class="text-center">
+                    <strong>Choose a sentence to get started!</strong>
+                </div>
+                <center><span class="fa fa-smile-o" id="good-job" style="font-size:100px;"></span></center>
             </div>
+            <!-- Game Content -->
             <div class="col-md-9">
                 <center>
-                    <img class="thumbnail img-responsive" src="img/teach.png" alt="">
+                    <img class="thumbnail img-responsive" src="img/teach.png" alt="Teach Your Child to Read" id="image-banner">
                 </center>
-                <div id="game-board" style="visibility: hidden;">
-                    <h2 id="sentence-text"> </h2>
-                    <span class="btn btn-primary" id="button-play-word" onclick="playCurrentWord();">
-                    <span class="glyphicon glyphicon-play"></span> Play Next Word
+                <!-- Game Board -->
+                <div id="game-board">
+                    <h2 id="sentence-text"></h2>
+                    <span class="btn btn-success" id="button-play-word">
+                    <span class="fa fa-play"></span>&nbsp;&nbsp;Play Next Word
                     </span>
-                    <span class="btn btn-primary pull-right" id="button-play-sentence" onclick="playCurrentSentence();">
-                    <span class="glyphicon glyphicon-fast-forward"></span> Play Sentence
+                    <span class="btn btn-success pull-right" id="button-play-sentence">
+                    <span class="fa fa-forward"></span>&nbsp;&nbsp;Play Sentence
                     </span>
                     <br/>
-                    <br/>
+                    <!-- Word Grid -->
                     <center>
                         <table class="table-bordered text-center">
                             <tr>
                                 <a href="#">
-                                    <td id="grid-0" onclick="checkWord(0);"></td>
+                                    <td id="grid-0" class="grid-word""></td>
                                 </a>
                                 <a href="#">
-                                    <td id="grid-1" onclick="checkWord(1);"></td>
+                                    <td id="grid-1" class="grid-word"></td>
                                 </a>
                                 <a href="#">
-                                    <td id="grid-2" onclick="checkWord(2);"></td>
-                                </a>
-                            </tr>
-                            <tr>
-                                <a href="#">
-                                    <td id="grid-3" onclick="checkWord(3);"></td>
-                                </a>
-                                <a href="#">
-                                    <td id="grid-4" onclick="checkWord(4);"></td>
-                                </a>
-                                <a href="#">
-                                    <td id="grid-5" onclick="checkWord(5);"></td>
+                                    <td id="grid-2" class="grid-word"></td>
                                 </a>
                             </tr>
                             <tr>
                                 <a href="#">
-                                    <td id="grid-6" onclick="checkWord(6);"></td>
+                                    <td id="grid-3" class="grid-word"></td>
                                 </a>
                                 <a href="#">
-                                    <td id="grid-7" onclick="checkWord(7);"></td>
+                                    <td id="grid-4" class="grid-word"></td>
                                 </a>
                                 <a href="#">
-                                    <td id="grid-8" onclick="checkWord(8);"></td>
+                                    <td id="grid-5" class="grid-word"></td>
+                                </a>
+                            </tr>
+                            <tr>
+                                <a href="#">
+                                    <td id="grid-6" class="grid-word"></td>
+                                </a>
+                                <a href="#">
+                                    <td id="grid-7" class="grid-word"></td>
+                                </a>
+                                <a href="#">
+                                    <td id="grid-8" class="grid-word"></td>
                                 </a>
                             </tr>
                         </table>
@@ -109,19 +107,19 @@
             </div>
         </div>
         <br />
+        <!-- Footer -->
         <div class="row">
-            <footer class="navbar navbar-inverse">
-                <div class="col-md-12">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a href="#">&copy; 2016, Teach Your Child to Read. All Rights Reserved.</a>
-                        </li>
-                    </ul>
-                </div>
-            </footer>
+            <div class="col-md-12" class="heading-bar">
+                <footer class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            <span class="navbar-brand" href="#" style="font-size:15px;">&copy; 2016, Reading Game. All Rights Reserved.</span>
+                        </div>
+                    </div>
+                </footer>
+            </div>
         </div>
-    </div>
-    <script src="js/main.js"></script>
+        <script src="js/main.js"></script>
 </body>
 
 </html>
