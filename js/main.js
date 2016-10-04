@@ -45,6 +45,7 @@ var playCurrentWord = function() {
 }
 
 var checkWord = function(gridPosition) {
+    play(wordsInPosition[gridPosition]);
     if (wordsInPosition[gridPosition] == sentences[currentSentenceNumber][currentWordNumber]) {
         sentenceTextArray = sentences[currentSentenceNumber].slice(0, currentWordNumber + 1);
         $("#sentence-text").html(sentenceTextArray.join(" "));
@@ -68,6 +69,7 @@ var runWord = function() {
 var runSentence = function(sentenceNumber) {
 	document.getElementById("game-board").style.visibility = "";
 	document.getElementById("get-started").style.visibility = "hidden";
+    $("#sentence-text").html("");
     currentSentenceNumber = sentenceNumber;
     currentWordNumber = 0;
     for (var i in sentences) {

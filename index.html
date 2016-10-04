@@ -30,7 +30,7 @@
                         <li>
                             <a href="#">Teach Your Child to Read</a>
                         </li>
-                        <li>
+<!--                         <li>
                             <a href="#">About</a>
                         </li>
                         <li>
@@ -38,7 +38,7 @@
                         </li>
                         <li>
                             <a href="#">Contact</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </nav>
@@ -61,7 +61,7 @@
                 <div id="game-board" style="visibility: hidden;">
                     <h2 id="sentence-text"> </h2>
                     <span class="btn btn-primary" id="button-play-word" onclick="playCurrentWord();">
-                    <span class="glyphicon glyphicon-play"></span> Play Word
+                    <span class="glyphicon glyphicon-play"></span> Play Next Word
                     </span>
                     <span class="btn btn-primary pull-right" id="button-play-sentence" onclick="playCurrentSentence();">
                     <span class="glyphicon glyphicon-fast-forward"></span> Play Sentence
@@ -72,35 +72,35 @@
                         <table class="table-bordered text-center">
                             <tr>
                                 <a href="#">
-                                    <td id="grid-0" onclick="play(wordsInPosition[0]);checkWord(0);"></td>
+                                    <td id="grid-0" onclick="checkWord(0);"></td>
                                 </a>
                                 <a href="#">
-                                    <td id="grid-1" onclick="play(wordsInPosition[1]);checkWord(1);"></td>
+                                    <td id="grid-1" onclick="checkWord(1);"></td>
                                 </a>
                                 <a href="#">
-                                    <td id="grid-2" onclick="play(wordsInPosition[2]);checkWord(2);"></td>
-                                </a>
-                            </tr>
-                            <tr>
-                                <a href="#">
-                                    <td id="grid-3" onclick="play(wordsInPosition[3]);checkWord(3);"></td>
-                                </a>
-                                <a href="#">
-                                    <td id="grid-4" onclick="play(wordsInPosition[4]);checkWord(4);"></td>
-                                </a>
-                                <a href="#">
-                                    <td id="grid-5" onclick="play(wordsInPosition[5]);checkWord(5);"></td>
+                                    <td id="grid-2" onclick="checkWord(2);"></td>
                                 </a>
                             </tr>
                             <tr>
                                 <a href="#">
-                                    <td id="grid-6" onclick="play(wordsInPosition[6]);checkWord(6);"></td>
+                                    <td id="grid-3" onclick="checkWord(3);"></td>
                                 </a>
                                 <a href="#">
-                                    <td id="grid-7" onclick="play(wordsInPosition[7]);checkWord(7);"></td>
+                                    <td id="grid-4" onclick="checkWord(4);"></td>
                                 </a>
                                 <a href="#">
-                                    <td id="grid-8" onclick="play(wordsInPosition[8]);checkWord(8);"></td>
+                                    <td id="grid-5" onclick="checkWord(5);"></td>
+                                </a>
+                            </tr>
+                            <tr>
+                                <a href="#">
+                                    <td id="grid-6" onclick="checkWord(6);"></td>
+                                </a>
+                                <a href="#">
+                                    <td id="grid-7" onclick="checkWord(7);"></td>
+                                </a>
+                                <a href="#">
+                                    <td id="grid-8" onclick="checkWord(8);"></td>
                                 </a>
                             </tr>
                         </table>
