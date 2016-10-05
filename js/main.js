@@ -82,6 +82,7 @@ var runSentence = function(sentenceNumber) {
     $("#button-sentence-" + currentSentenceNumber).addClass("active");
     shuffleWords();
     play("I'm going to read a sentence to you. Then I will read each word. Click on the word after I say it. Let's get going!");
+    playCurrentSentence();
     runWord();
 }
 
